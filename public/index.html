@@ -189,29 +189,32 @@ section{position:relative}
 .tabs button{font-family:var(--fell);font-size:19px;padding:9px 20px 8px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;transition:all .2s}
 .tabs button:hover{border-color:var(--ink)}
 .tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper-2)}
-.panel{display:none}
-.panel.on{display:block;animation:fade .45s ease}
+.panel{display:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
+.panel.on{display:grid;animation:fade .45s ease}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.pics{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px;padding:0 4%;align-items:start}
-.pics .ph{aspect-ratio:auto;height:270px}
-/* la carta: una lavagna come quella sui tavoli, che sale sopra le foto */
-.carta{position:relative;z-index:2;margin-top:-54px;background:var(--slate);color:#efe6d4;padding:46px 56px 38px;border-radius:22px;
-  background-image:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.06),transparent 60%),radial-gradient(ellipse at 80% 90%,rgba(255,255,255,.04),transparent 50%);
-  box-shadow:inset 0 0 0 10px #3b2a1f,inset 0 0 0 11px rgba(176,138,74,.6),0 26px 50px -30px rgba(0,0,0,.8)}
-.carta h3{font-family:var(--fell);font-weight:400;font-size:44px;line-height:1;text-align:center}
-.carta .sub{font-style:italic;font-size:17px;color:#bfb29c;text-align:center;margin:8px 0 22px}
-.carta .cols{columns:2;column-gap:64px;column-rule:1px dotted rgba(239,230,212,.18)}
-.carta .cols>ul>li,.carta .grp{break-inside:avoid}
-.carta .grp{margin-bottom:6px}
-.carta h4{font-family:var(--sc);font-weight:400;font-size:20px;letter-spacing:.04em;color:#e2c48d;margin:6px 0 2px}
+.pics{position:sticky;top:110px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pics .frame:first-child{grid-column:1/-1}
+.pics .frame:first-child .ph{aspect-ratio:4/4.4}
+.pics .ph{aspect-ratio:1/1}
+/* la carta: una lavagna come quella sui tavoli */
+.carta{position:relative;background:var(--slate);color:#efe6d4;padding:60px 64px 50px;border-radius:26px;
+  background-image:radial-gradient(ellipse at 30% 15%,rgba(255,255,255,.06),transparent 60%),radial-gradient(ellipse at 80% 90%,rgba(255,255,255,.04),transparent 50%);
+  box-shadow:inset 0 0 0 12px #3b2a1f,inset 0 0 0 13px rgba(176,138,74,.6),0 30px 60px -34px rgba(0,0,0,.8)}
+.carta h3{font-family:var(--fell);font-weight:400;font-size:54px;line-height:1;text-align:center}
+.carta .sub{font-style:italic;font-size:18px;color:#bfb29c;text-align:center;margin:12px 0 0}
+.carta .sub::after{content:"❦";display:block;color:#e2c48d;font-style:normal;font-size:22px;margin:22px 0 10px}
+.carta .grp{margin-top:30px}
+.carta .grp:first-child{margin-top:0}
+.carta h4{font-family:var(--sc);font-weight:400;font-size:22px;letter-spacing:.05em;color:#e2c48d;text-align:center;margin-bottom:6px}
 .carta ul{list-style:none}
-.carta li{padding:9px 0}
-.carta .row{display:flex;align-items:baseline;gap:8px;font-size:18.5px}
+.carta li{padding:18px 0;border-bottom:1px solid rgba(239,230,212,.1)}
+.carta li:last-child{border-bottom:0}
+.carta .row{display:flex;align-items:baseline;gap:10px;font-size:21px}
 .carta .row b{font-weight:500}
-.carta .row::after{content:"";order:2;flex:1;border-bottom:1px dotted rgba(239,230,212,.45);transform:translateY(-4px)}
-.carta .row .p{order:3;font-variant-numeric:oldstyle-nums;white-space:nowrap}
-.carta small{display:block;font-size:15.5px;font-style:italic;color:#bfb29c;line-height:1.4;margin-top:1px}
-.carta .foot{margin-top:20px;padding-top:14px;border-top:1px dotted rgba(239,230,212,.35);font-size:15px;font-style:italic;color:#bfb29c;text-align:center}
+.carta .row::after{content:"";order:2;flex:1;border-bottom:1px dotted rgba(239,230,212,.4);transform:translateY(-5px)}
+.carta .row .p{order:3;font-variant-numeric:oldstyle-nums;white-space:nowrap;color:#f3dfb5}
+.carta small{display:block;font-size:16.5px;font-style:italic;color:#bfb29c;line-height:1.5;margin-top:4px;max-width:520px}
+.carta .foot{margin-top:26px;padding-top:18px;border-top:1px dotted rgba(239,230,212,.3);font-size:15.5px;font-style:italic;color:#bfb29c;text-align:center}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:100%;margin:0 auto 40px;padding:5px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line)}
 .tabs button{border:0!important}
 .menu-note{text-align:center;font-style:italic;color:var(--ink-2);margin-top:36px;font-size:17px}
@@ -319,8 +322,12 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(191,174,146,.35)}
   nav.main{display:none}
   .burger{display:flex}
   .rv-track{grid-auto-columns:calc((100% - 24px)/2)}
-  .carta .cols{columns:1}
-  .carta{padding:40px 36px 32px}
+  .panel{grid-template-columns:1fr;gap:34px}
+  .tabs{border-radius:28px}
+  .pics{position:static;grid-template-columns:repeat(3,1fr)}
+  .pics .frame:first-child{grid-column:auto}
+  .pics .frame:first-child .ph{aspect-ratio:1/1}
+  .carta{padding:50px 44px 40px}
   header.top .wrap{grid-template-columns:auto 1fr;height:76px}
   .brand{justify-self:start}
   #pill-t{display:none}
@@ -371,8 +378,8 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(191,174,146,.35)}
   .pics{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -20px;padding:0 20px 4px;scrollbar-width:none}
   .pics::-webkit-scrollbar{display:none}
   .pics .frame{flex:0 0 74%;scroll-snap-align:center}
-  .pics .ph{height:220px}
-  .carta{margin-top:-30px;border-radius:18px}
+  .pics .ph,.pics .frame:first-child .ph{aspect-ratio:4/3}
+  .carta{border-radius:20px}
   .rv-head{grid-template-columns:auto minmax(0,1fr);gap:18px}
   .rv-seal{width:96px;height:96px}.rv-seal b{font-size:38px}
   .rv-head h2{font-size:28px}
@@ -382,9 +389,11 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(191,174,146,.35)}
   .drawer nav a{font-size:32px}
   .tabs::-webkit-scrollbar{display:none}
   .tabs button{flex:none}
-  .carta{padding:34px 24px 26px}
-  .carta h3{font-size:34px}
-  .carta .row{font-size:17.5px}
+  .carta{padding:42px 26px 32px}
+  .carta li{padding:15px 0}
+  .carta small{font-size:15.5px}
+  .carta h3{font-size:40px}
+  .carta .row{font-size:18.5px}
   .collage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .collage .frame{position:static;width:auto;transform:none}
   .collage .c1{grid-row:span 2;display:flex;flex-direction:column}.collage .c1 .ph{aspect-ratio:auto;flex:1;min-height:380px}
